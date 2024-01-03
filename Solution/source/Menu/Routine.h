@@ -119,7 +119,7 @@ extern bool loop_RainbowBoxes, loop_forge_gun, loop_player_noRagdoll, loop_playe
 loop_explosive_rounds, loop_flaming_rounds, loop_teleport_gun, loop_kaboom_gun, loop_triggerfx_gun, loop_bullet_gun, loop_ped_gun, loop_object_gun, loop_light_gun, loop_bullet_time, loop_self_triggerbot,
 loop_explosive_melee, loop_super_jump, loop_self_refillHealthInCover, loop_player_invincibility, loop_no_clip, loop_no_clip_toggle, loop_super_run,
 loop_XYZHcoords, loop_ignored_by_everyone, loop_never_wanted, loop_superman, loop_superman_auto,
-loop_vehicle_population, loop_ped_population, loop_clearWeaponPickups, loop_drive_on_water, loop_massacre_mode,
+loop_vehicle_population, loop_ped_population, loop_clearWeaponPickups, loop_drive_on_water, loop_prep_veh_2T1_gift, loop_massacre_mode,
 loop_player_burn, loop_vehicle_invincibility, loop_vehicle_heavymass, loop_race_boost,
 loop_car_hydraulics, loop_super_grip, loop_SuprKarMode, loop_unlimVehBoost,
 
@@ -157,6 +157,10 @@ void set_Ptfxlop_tick();
 
 // Time
 void set_sync_clock_time();
+
+
+// Misc - prep_veh_for_2Take1_gift
+void prep_veh_for_2Take1_gift();
 
 // Misc - massacre mode
 void set_massacre_mode_tick();
@@ -303,5 +307,4 @@ void clear_ped_facial_mood(GTAentity ped);
 
 
 #pragma endregion
-
 
