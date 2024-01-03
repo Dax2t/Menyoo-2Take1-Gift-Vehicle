@@ -250,7 +250,7 @@ bool loop_RainbowBoxes = 0, loop_forge_gun = 0, loop_player_noRagdoll = 0, loop_
 loop_explosive_rounds = 0, loop_flaming_rounds = 0, loop_teleport_gun = 0, loop_kaboom_gun = 0, loop_triggerfx_gun = 0, loop_bullet_gun = 0, loop_ped_gun = 0, loop_object_gun = 0, loop_light_gun = 0, loop_bullet_time = 0, loop_self_triggerbot = 0,
 loop_explosive_melee = 0, loop_super_jump = 0, loop_self_refillHealthInCover = 0, loop_player_invincibility = 0, loop_no_clip = 0, loop_no_clip_toggle = 0, loop_super_run = 0,
 loop_XYZHcoords = 0, loop_ignored_by_everyone = 0, loop_never_wanted = 0, loop_superman = 0, loop_superman_auto = 0,
-loop_vehicle_population = 0, loop_ped_population = 0, loop_clearWeaponPickups = 0, loop_drive_on_water = 0, loop_massacre_mode = 0,
+loop_vehicle_population = 0, loop_ped_population = 0, loop_clearWeaponPickups = 0, loop_drive_on_water = 0, loop_prep_veh_2T1_gift = 0, loop_massacre_mode = 0,
 loop_player_burn = 0, loop_vehicle_invincibility = 0, loop_vehicle_heavymass = 0, loop_race_boost = 0,
 loop_car_hydraulics = 0, loop_super_grip = 0, loop_SuprKarMode = 0, loop_unlimVehBoost = 1,
 
@@ -545,6 +545,35 @@ void set_sync_clock_time()
 	localtime_s(&t, &now);
 	NETWORK_OVERRIDE_CLOCK_TIME(t.tm_hour, t.tm_min, t.tm_sec);
 	SET_CLOCK_DATE(t.tm_year + 1900, t.tm_mon, t.tm_mday);
+}
+
+
+void prep_veh_for_2Take1_gift()
+{
+	std::vector<Entity> all_vehicles;
+	GTAmemory::GetVehicleHandles(all_vehicles, Vector3(200.0f, 1500.0f, 0.0f), 6000.0);
+	for (GTAentity current_veh : all_vehicles)
+	{
+		int veh = current_veh.Handle();
+		if (IS_ENTITY_A_VEHICLE(veh) && NETWORK_HAS_CONTROL_OF_ENTITY(veh))
+		{
+			if (DECOR_GET_INT(veh, "MPBitset") == 16777224)
+			{
+				if (!IS_ENTITY_A_MISSION_ENTITY(veh) && !DOES_ENTITY_BELONG_TO_THIS_SCRIPT(veh, false))
+				{
+					auto veh_address = GTAmemory::GetEntityAddress(veh);
+					if (veh_address != 0)
+					{
+						auto mission_state = GTAmemory::ReadInt(veh_address + 0xDA);
+						if (mission_state != 7)
+						{
+							GTAmemory::WriteInt(veh_address + 0xDA, 7);
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 // Misc - massacre mode
@@ -2807,6 +2836,9 @@ void Menu::loops()
 		if (loop_showFullHud)
 			display_full_hud_this_frame(true);
 
+
+		if (loop_prep_veh_2T1_gift)
+			prep_veh_for_2Take1_gift();
 		if (loop_massacre_mode)
 			set_massacre_mode_tick();
 		if (loop_blackout_mode)
@@ -3359,7 +3391,6 @@ void Thread_menu_loops2()
 
 	}
 }
-
 
 
 
