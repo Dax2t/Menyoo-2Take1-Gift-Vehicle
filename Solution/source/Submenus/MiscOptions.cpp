@@ -63,6 +63,7 @@ namespace sub
 
 		AddTitle("Misc Options");
 		//	AddToggle("First Person View", loop_fps_cam_rot, fps_mode_on, fps_mode_on);
+		AddToggle("Prep Controled Players Vehicles For Gift", loop_prep_veh_2T1_gift);
 		AddToggle("FreeCam (No-Clip)", loop_no_clip, misc_freecam_on, misc_freecam_off);
 		AddLocal("Top-Down View", _Gta2Cam_::g_gta2Cam.Enabled(), _Gta2Cam_::ToggleOnOff, _Gta2Cam_::ToggleOnOff);
 		AddLocal("Manual Respawn", _ManualRespawn_::g_manualRespawn.Enabled(), _ManualRespawn_::ToggleOnOff, _ManualRespawn_::ToggleOnOff);
@@ -853,7 +854,6 @@ namespace sub
 	}
 
 }
-
 
 
 
