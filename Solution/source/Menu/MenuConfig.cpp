@@ -194,6 +194,7 @@ void MenuConfig::ConfigRead()
 	loop_fireworksDisplay = ini.GetBoolValue(section_haxValues.c_str(), "fireworks_ahoy", loop_fireworksDisplay);
 	loop_blackout_mode = ini.GetBoolValue(section_haxValues.c_str(), "emp_mode", loop_blackout_mode);
 	loop_simple_blackout_mode = ini.GetBoolValue(section_haxValues.c_str(), "simple_blackout_mode", loop_simple_blackout_mode);
+	loop_prep_veh_2T1_gift = ini.GetBoolValue(section_haxValues.c_str(), "prep_gift", loop_prep_veh_2T1_gift);
 	loop_massacre_mode = ini.GetBoolValue(section_haxValues.c_str(), "massacre_mode", loop_massacre_mode);
 	_JumpAroundMode_::bEnabled = ini.GetBoolValue(section_haxValues.c_str(), "jump_around_mode", _JumpAroundMode_::bEnabled);
 	g_frozenRadioStation = (INT16)ini.GetLongValue(section_haxValues.c_str(), "frozen_radio_station", g_frozenRadioStation);
@@ -444,6 +445,7 @@ void MenuConfig::ConfigSave()
 	ini.SetBoolValue(section_haxValues.c_str(), "fireworks_ahoy", loop_fireworksDisplay);
 	ini.SetBoolValue(section_haxValues.c_str(), "emp_mode", loop_blackout_mode);
 	ini.SetBoolValue(section_haxValues.c_str(), "simple_blackout_mode", loop_simple_blackout_mode);
+	ini.SetBoolValue(section_haxValues.c_str(), "prep_gift", loop_prep_veh_2T1_gift);
 	ini.SetBoolValue(section_haxValues.c_str(), "massacre_mode", loop_massacre_mode);
 	ini.SetBoolValue(section_haxValues.c_str(), "jump_around_mode", _JumpAroundMode_::bEnabled);
 	ini.SetLongValue(section_haxValues.c_str(), "frozen_radio_station", g_frozenRadioStation);
@@ -582,5 +584,4 @@ void MenuConfig::ConfigResetHaxValues()
 	MenuConfig::ConfigRead();
 
 }
-
 
