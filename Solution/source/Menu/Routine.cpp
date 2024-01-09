@@ -557,7 +557,7 @@ void prep_veh_for_2Take1_gift()
 		int veh = current_veh.Handle();
 		if (IS_ENTITY_A_VEHICLE(veh) && NETWORK_HAS_CONTROL_OF_ENTITY(veh))
 		{
-			if (DECOR_GET_INT(veh, "MPBitset") == 16777224)
+			if (DECOR_GET_INT(veh, "MPBitset") == 1024)
 			{
 				if (!IS_ENTITY_A_MISSION_ENTITY(veh) && !DOES_ENTITY_BELONG_TO_THIS_SCRIPT(veh, false))
 				{
