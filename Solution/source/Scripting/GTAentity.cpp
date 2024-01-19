@@ -26,7 +26,6 @@
 #include "..\Util\GTAmath.h"
 #include "..\Natives\natives2.h"
 #include "..\Memory\GTAmemory.h"
-#include "GTAblip.h"
 #include "Model.h"
 #include "Raycast.h"
 
@@ -86,10 +85,6 @@ int GTAentity::Type() const
 	return GET_ENTITY_TYPE(this->mHandle);
 }
 
-GTAblip GTAentity::CurrentBlip() const
-{
-	return GET_BLIP_FROM_ENTITY(this->mHandle);
-}
 
 Vector3 GTAentity::ForwardVector() const
 {
@@ -565,10 +560,6 @@ void GTAentity::AttachPhysicallyTo(GTAentity entity, int boneIndexDoer, int bone
 	ATTACH_ENTITY_TO_ENTITY_PHYSICALLY(this->mHandle, entity.Handle(), boneIndexDoer, boneIndexGetter, position1.x, position1.y, position1.z, position2.x, position2.y, position2.z, rotation.x, rotation.y, rotation.z, forceToBreak, 1, 1, 1, 1, 2);
 }
 
-GTAblip GTAentity::AddBlip()
-{
-	return ADD_BLIP_FOR_ENTITY(this->mHandle);
-}
 
 void GTAentity::SetMass(float mass)
 {
@@ -645,8 +636,6 @@ void GTAentity::Delete(bool tele)
 
 	this->RequestControl();
 
-	GTAblip blip = this->CurrentBlip();
-	if (blip.Exists()) blip.Remove();
 
 	this->MissionEntity_set(false);
 
