@@ -19,49 +19,6 @@ typedef unsigned short UINT16;
 namespace sub
 {
 	void MiscOps();
-
-	void Timecycles_();
-
-	void ClearAreaSub();
-
-	void DrawToolSub_();
-
-	void RadioSub_();
-
-	namespace WaterHack_catind
-	{
-		void Tick();
-
-		void Sub_WaterHack();
-	}
-
-	namespace TVChannelStuff_catind
-	{
-		extern bool loop_basictv;
-
-		extern std::string currentTvChannelLabel;
-		extern std::map<std::string, std::string> vTvPlaylists;
-
-		void DrawTvWhereItsSupposedToBe();
-
-		void Sub_TV();
-	}
-
-	namespace HudOptions_catind
-	{
-		extern bool loop_revealMinimap;
-
-		void Sub_HudOptions();
-	}
-
-	namespace GameCamOptions_catind
-	{
-		extern float _shakeAmplitude;
-		extern INT8 _shakeId;
-
-		void Sub_GameCamOptions();
-	}
-
 }
 
 
