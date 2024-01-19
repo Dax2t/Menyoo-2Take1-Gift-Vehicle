@@ -18,10 +18,7 @@
 #include "..\Scripting\Scaleform.h"
 #include "..\Memory\GTAmemory.h"
 #include "..\Scripting\Game.h"
-#include "..\Scripting\GameplayCamera.h"
-#include "..\Scripting\ModelNames.h" // _vNeonColours
 #include "Routine.h" // (loop_no_clip_toggle, loop_hide_hud)
-#include "Language.h"
 
 #include <Windows.h>
 #include <utility>
@@ -189,147 +186,6 @@ void Menu::SetInputMethods()
 }
 void Menu::DisableControls()
 {
-	// Keyboard
-	if (!bit_controller)
-	{
-		//DISPLAY_HUD(0);
-		HIDE_HELP_TEXT_THIS_FRAME();
-		SET_CINEMATIC_BUTTON_ACTIVE(1);
-		DISABLE_CONTROL_ACTION(0, INPUT_LOOK_BEHIND, TRUE);
-		DISABLE_CONTROL_ACTION(0, INPUT_NEXT_CAMERA, TRUE);
-		DISABLE_CONTROL_ACTION(0, INPUT_VEH_SELECT_NEXT_WEAPON, TRUE);
-		DISABLE_CONTROL_ACTION(0, INPUT_VEH_CIN_CAM, TRUE);
-		SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_ACCEPT);
-		SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_CANCEL);
-		DISABLE_CONTROL_ACTION(0, INPUT_HUD_SPECIAL, TRUE);
-		SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_DOWN);
-		SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_UP);
-		SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_LEFT);
-		SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_RIGHT);
-		DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_ACCEPT, TRUE);
-		DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_CANCEL, TRUE);
-		DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_LEFT, TRUE);
-		DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_RIGHT, TRUE);
-		DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_DOWN, TRUE);
-		DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_UP, TRUE);
-		DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_ACCEPT, TRUE);
-		HIDE_HUD_COMPONENT_THIS_FRAME(10);
-		HIDE_HUD_COMPONENT_THIS_FRAME(6);
-		HIDE_HUD_COMPONENT_THIS_FRAME(7);
-		HIDE_HUD_COMPONENT_THIS_FRAME(9);
-		HIDE_HUD_COMPONENT_THIS_FRAME(8);
-		DISABLE_CONTROL_ACTION(0, INPUT_SELECT_CHARACTER_FRANKLIN, TRUE);
-		DISABLE_CONTROL_ACTION(0, INPUT_SELECT_CHARACTER_MICHAEL, TRUE);
-		DISABLE_CONTROL_ACTION(0, INPUT_SELECT_CHARACTER_TREVOR, TRUE);
-		DISABLE_CONTROL_ACTION(0, INPUT_SELECT_CHARACTER_MULTIPLAYER, TRUE);
-		DISABLE_CONTROL_ACTION(0, INPUT_CHARACTER_WHEEL, TRUE);
-		DISABLE_CONTROL_ACTION(2, INPUT_CELLPHONE_CANCEL, TRUE);
-		DISABLE_CONTROL_ACTION(2, INPUT_CELLPHONE_SELECT, TRUE);
-		DISABLE_CONTROL_ACTION(2, INPUT_CELLPHONE_UP, TRUE);
-		DISABLE_CONTROL_ACTION(2, INPUT_CELLPHONE_DOWN, TRUE);
-
-		return;
-	}
-	// Controller
-	//DISPLAY_HUD(0);
-	HIDE_HELP_TEXT_THIS_FRAME();
-	SET_CINEMATIC_BUTTON_ACTIVE(1);
-	DISABLE_CONTROL_ACTION(0, INPUT_NEXT_CAMERA, TRUE);
-	SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_X);
-	SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_ACCEPT);
-	SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_CANCEL);
-	DISABLE_CONTROL_ACTION(0, INPUT_HUD_SPECIAL, TRUE);
-	SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_DOWN);
-	SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_UP);
-	DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_ACCEPT, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_CANCEL, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_LEFT, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_RIGHT, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_DOWN, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_UP, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_RDOWN, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_FRONTEND_ACCEPT, TRUE);
-	HIDE_HUD_COMPONENT_THIS_FRAME(10);
-	HIDE_HUD_COMPONENT_THIS_FRAME(6);
-	HIDE_HUD_COMPONENT_THIS_FRAME(7);
-	HIDE_HUD_COMPONENT_THIS_FRAME(9);
-	HIDE_HUD_COMPONENT_THIS_FRAME(8);
-	SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_LEFT);
-	SET_INPUT_EXCLUSIVE(2, INPUT_FRONTEND_RIGHT);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_UNARMED, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_MELEE, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_HANDGUN, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_SHOTGUN, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_SMG, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_AUTO_RIFLE, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_SNIPER, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_HEAVY, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_SPECIAL, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_WEAPON_WHEEL_NEXT, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_WEAPON_WHEEL_PREV, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_WEAPON_SPECIAL, 1);
-	DISABLE_CONTROL_ACTION(0, INPUT_WEAPON_SPECIAL_TWO, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_DIVE, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_MELEE_ATTACK_LIGHT, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_MELEE_ATTACK_HEAVY, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_MELEE_BLOCK, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_ARREST, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_VEH_HEADLIGHT, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_VEH_RADIO_WHEEL, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_CONTEXT, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_RELOAD, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_VEH_CIN_CAM, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_JUMP, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_VEH_SELECT_NEXT_WEAPON, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_VEH_FLY_SELECT_NEXT_WEAPON, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_CHARACTER_FRANKLIN, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_CHARACTER_MICHAEL, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_CHARACTER_TREVOR, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_SELECT_CHARACTER_MULTIPLAYER, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_CHARACTER_WHEEL, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_CELLPHONE_CANCEL, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_CELLPHONE_SELECT, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_CELLPHONE_UP, TRUE);
-	DISABLE_CONTROL_ACTION(2, INPUT_CELLPHONE_DOWN, TRUE);
-	DISABLE_CONTROL_ACTION(0, INPUT_DETONATE, 1);
-	DISABLE_CONTROL_ACTION(0, INPUT_SPRINT, 1);
-	DISABLE_CONTROL_ACTION(0, INPUT_VEH_DUCK, 1);
-	DISABLE_CONTROL_ACTION(0, INPUT_VEH_HEADLIGHT, 1);
-	DISABLE_CONTROL_ACTION(0, INPUT_VEH_PUSHBIKE_SPRINT, 1);
-	DISABLE_CONTROL_ACTION(0, INPUT_VEH_PUSHBIKE_PEDAL, 1);
-
-	// pi_menu
-	/*	if (CONTROLS::_0xA571D46727E2B718(2)) {
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 237);
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 238);
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 241);
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 242);
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 239);
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 240);
-	CONTROLS::ENABLE_CONTROL_ACTION(2, 176, 1);
-	}
-	else {
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 176);
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 177);
-	}
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 172);
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 173);
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 174);
-	CONTROLS::SET_INPUT_EXCLUSIVE(2, 175);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON, 1);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_UNARMED, 1);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_MELEE, 1);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_HANDGUN, 1);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_SHOTGUN, 1);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_SMG, 1);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_AUTO_RIFLE, 1);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_SNIPER, 1);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_HEAVY, 1);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_SELECT_WEAPON_SPECIAL, 1);
-	CONTROLS::DISABLE_CONTROL_ACTION(0, INPUT_VEH_RADIO_WHEEL, 1);*/
-
-
 }
 void Menu::base()
 {
@@ -373,48 +229,10 @@ void Menu::titlebox_draw()
 {
 	titletext_ALPHA_DIS_TEMP = true;
 
-	// Oh why oh why did I do it this way
-	switch (currentsub)
-	{
-	case SUB::COMPONENTS: case SUB::COMPONENTS2: case SUB::COMPONENTS_OUTFITS: case SUB::COMPONENTS_OUTFITS2:
-		DRAW_SPRITE("shopui_title_highendfashion", "shopui_title_highendfashion", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-	case SUB::COMPONENTSPROPS: case SUB::COMPONENTSPROPS2:
-		DRAW_SPRITE("shopui_title_midfashion", "shopui_title_midfashion", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-	case SUB::PEDDECALS_TYPES: case SUB::PEDDECALS_ZONES: case SUB::PEDDECALS_INZONE:
-		DRAW_SPRITE("shopui_title_tattoos", "shopui_title_tattoos", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-	case SUB::PEDDAMAGET_CATEGORYLIST:	case SUB::PEDDAMAGET_BONESELECTION: case SUB::PEDDAMAGET_BLOOD: case SUB::PEDDAMAGET_DAMAGEDECALS: case SUB::PEDDAMAGET_DAMAGEPACKS:
-		DRAW_SPRITE("shopui_title_tattoos3", "shopui_title_tattoos3", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-	case SUB::PED_HEADFEATURES_MAIN: case SUB::PED_HEADFEATURES_HEADOVERLAYS: case SUB::PED_HEADFEATURES_HEADOVERLAYS_INITEM: case SUB::PED_HEADFEATURES_FACEFEATURES: case SUB::PED_HEADFEATURES_SKINTONE:
-		DRAW_SPRITE("shopui_title_highendsalon", "shopui_title_highendsalon", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-	case SUB::MODSHOP: case SUB::MSDOORS: case SUB::MSCATALL: case SUB::MSEXTRA: case SUB::MSLIGHTS: case SUB::MSNEONS: case SUB::MSWHEELS: case SUB::MSWHEELS2: case SUB::MSWHEELS3: case SUB::MS_TYRESBURST: case SUB::GETALLPAINTIDS: case SUB::MSPAINTS: case SUB::MSPAINTS2: case SUB::MSPAINTS2_CHROME: case SUB::MSPAINTS2_MATTE: case SUB::MSPAINTS2_METAL: case SUB::MSPAINTS2_CHAMELEON: case SUB::MSPAINTS2_METALLIC: case SUB::MSPAINTS2_NORMAL: case SUB::MSPAINTS2_SHARED: case SUB::MSENGINESOUND: //case SUB::MSPAINTS_RGB:
-		if (Menu::currentsub_ar[currentsub_ar_index] != SUB::MS_BENNYS)
-		{
-			DRAW_SPRITE("shopui_title_carmod", "shopui_title_carmod", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-		}
-	case SUB::MS_BENNYS:
-		DRAW_SPRITE("shopui_title_supermod", "shopui_title_supermod", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-	case SUB::WEAPONOPS: case SUB::KABOOMGUN: case SUB::BULLETGUN: case SUB::OBJECTGUN: case SUB::PEDGUN: case SUB::WEAPONOPS_WEAPONFAVOURITES: case SUB::WEAPONOPS_INDIVS_CATEGORIES: case SUB::WEAPONOPS_INDIVS_CATEGORY: case SUB::WEAPONOPS_INDIVS_ITEM: case SUB::WEAPONOPS_INDIVS_ITEM_MODS: case SUB::WEAPONOPS_PARACHUTE: case SUB::WEAPONOPS_LOADOUTS: case SUB::WEAPONOPS_LOADOUTS_INITEM: case SUB::WEAPONOPS_LASERSIGHT: case SUB::FORGEGUN: case SUB::GRAVITYGUN:
-		DRAW_SPRITE("shopui_title_gunclub", "shopui_title_gunclub", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-		//case SUB::OBJECTSPAWNER_LIGHTINGOPS: case SUB::OBJECTSPAWNER_LIGHT: case SUB::OBJECTSPAWNER_SPOTLIGHT:
-			//DRAW_SPRITE("shopui_title_movie_masks", "shopui_title_movie_masks", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A); break;
-	case SUB::SPAWNVEHICLE: case SUB::SPAWNVEHICLE_OPTIONS: case SUB::SPAWNVEHICLE_ALLCATS: case SUB::SPAWNVEHICLE_FAVOURITES: case SUB::FUNNYVEHICLES: case SUB::VEHICLE_SAVER: case SUB::VEHICLE_SAVER_INITEM:
-		DRAW_SPRITE("shopui_title_carmod2", "shopui_title_carmod2", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-	case SUB::ANIMATIONSUB: case SUB::ANIMATIONSUB_DEER: case SUB::ANIMATIONSUB_GESTSIT: case SUB::ANIMATIONSUB_GUARDREAC: case SUB::ANIMATIONSUB_MISSRAPPEL: case SUB::ANIMATIONSUB_RANDARREST: case SUB::ANIMATIONSUB_SHARK: case SUB::ANIMATIONSUB_SWAT: case SUB::ANIMATIONSUB_CUSTOM: case SUB::ANIMATIONSUB_SETTINGS: case SUB::ANIMATIONSUB_TASKSCENARIOS: case SUB::ANIMATIONSUB_TASKSCENARIOS2: case SUB::MOVEMENTGROUP:
-		DRAW_SPRITE("shopui_title_tennis", "shopui_title_tennis", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-	case SUB::TELEPORTOPS_YACHTS: case SUB::TELEPORTOPS_YACHTS_INGRP:
-		DRAW_SPRITE("dock_dlc_banner", "yacht_banner_0", 0.16f + menuPos.x, 0.0989f + menuPos.y, 0.20f, 0.083f, 0.0f, 255, 255, 255, titlebox.A, false, 0); break;
-		//case SUB::SPOONER_MAIN:
-		//DxHookIMG::titleui_spooner.Draw(0, Vector2(0.16f + menuPos.x, 0.0989f + menuPos.y), Vector2(0.20f, 0.083f), 0.0f, RGBA(255, 255, 255, titlebox.A)); break;
-
-	default:
-		if (gradients) DRAW_SPRITE("CommonMenu", "Gradient_Nav"/*"interaction_bgd"*/, 0.16f + menuPos.x, 0.1175f + menuPos.y, 0.20f, 0.083f, 0.0f, titlebox.R, titlebox.G, titlebox.B, titlebox.A, false, 0);
-		else DRAW_RECT(0.16f + menuPos.x, 0.1175f + menuPos.y, 0.20f, 0.083f, titlebox.R, titlebox.G, titlebox.B, titlebox.A, false);
-		RESET_SCRIPT_GFX_ALIGN();
-		titletext_ALPHA_DIS_TEMP = false;
-		//glare_test();
-		break;
-
-	}
+	if (gradients) DRAW_SPRITE("CommonMenu", "Gradient_Nav"/*"interaction_bgd"*/, 0.16f + menuPos.x, 0.1175f + menuPos.y, 0.20f, 0.083f, 0.0f, titlebox.R, titlebox.G, titlebox.B, titlebox.A, false, 0);
+	else DRAW_RECT(0.16f + menuPos.x, 0.1175f + menuPos.y, 0.20f, 0.083f, titlebox.R, titlebox.G, titlebox.B, titlebox.A, false);
+	RESET_SCRIPT_GFX_ALIGN();
+	titletext_ALPHA_DIS_TEMP = false;
 
 	if (titletext_ALPHA_DIS_TEMP) // Draw titlebox lower stripe
 	{
@@ -422,8 +240,6 @@ void Menu::titlebox_draw()
 		else DRAW_RECT(0.16f + menuPos.x, 0.1496f + menuPos.y, 0.20f, 0.02f, titlebox.R, titlebox.G, titlebox.B, titlebox.A, false);
 
 	}
-
-
 }
 void Menu::background()
 {
@@ -544,16 +360,6 @@ void Menu::while_opened()
 	totalop = printingop; printingop = 0;
 	totalbreaks = breakcount; breakcount = 0; breakscroll = 0;
 
-	if (IS_PAUSE_MENU_ACTIVE()) SetSub_closed();
-
-	if (IS_GAMEPLAY_HINT_ACTIVE()) STOP_GAMEPLAY_HINT(false);
-	DISPLAY_AMMO_THIS_FRAME(0);
-	DISPLAY_CASH(0);
-	SET_RADAR_ZOOM(0);
-	//FLOAT* g_3805 = reinterpret_cast<FLOAT *>(getGlobalPtr(0x3805));
-	//SET_MOBILE_PHONE_POSITION(g_3805[0], g_3805[1], g_3805[2]);
-	if (IS_MOBILE_PHONE_CALL_ONGOING()) STOP_SCRIPTED_CONVERSATION(0);
-	//TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME("cellphone_controller");
 
 	if (!HAS_THIS_ADDITIONAL_TEXT_LOADED("HAR_MNU", 9)) REQUEST_ADDITIONAL_TEXT("HAR_MNU", 9);
 	if (!HAS_THIS_ADDITIONAL_TEXT_LOADED("MOD_MNU", 2)) REQUEST_ADDITIONAL_TEXT("MOD_MNU", 2);
@@ -670,8 +476,6 @@ void Menu::SetSub_new(INT sub_index)
 void Menu::SetSub_closed()
 {
 	//Game::RequestScript("cellphone_controller");
-	ENABLE_ALL_CONTROL_ACTIONS(0);
-	ENABLE_ALL_CONTROL_ACTIONS(2);
 	Game::Sound::PlayFrontend_default("BACK");
 
 	LOOCsub = currentsub;
@@ -687,11 +491,6 @@ void Menu::SetSub_closed()
 
 void Menu::glare_test()
 {
-	if (loop_no_clip_toggle)
-	{
-		//Label_unloadglare:;
-		scaleform_menuGlare.Unload();
-	}
 
 	if (!scaleform_menuGlare.Load("MP_MENU_GLARE")) return;
 
@@ -740,23 +539,6 @@ void Menu::glare_test()
 
 void Menu::set_opened_IB()
 {
-	if (!bit_frontend_addnumber_selected)
-		add_IB(INPUT_CELLPHONE_SELECT, "ITEM_SELECT");
-	if (currentsub != SUB::MAINMENU)
-		add_IB(INPUT_FRONTEND_RRIGHT, "ITEM_BACK");
-	else
-		add_IB(INPUT_FRONTEND_RRIGHT, "ITEM_EXIT");
-	/*if (bit_frontend_addnumber_selected)
-	{
-	Menu::add_IB(INPUT_FRONTEND_RIGHT, "Right");
-	Menu::add_IB(INPUT_FRONTEND_LEFT, "Left");
-	}
-	if (Menu::totalop > 1)
-	{
-	add_IB(INPUT_FRONTEND_DOWN, "Down");
-	add_IB(INPUT_FRONTEND_UP, "Up");
-	}*/
-
 	bit_frontend_addnumber_selected = false;
 }
 void Menu::add_IB(ControllerInput button_id, std::string string_val)
@@ -976,12 +758,10 @@ void MouseSupport::DoMouseTick()
 
 	if (IsMouseInBounds(Vector2(0.0078f, 0.5f), Vector2(0.0156f, 1.0f)))
 	{
-		GameplayCamera::RelativeHeading_set(GameplayCamera::RelativeHeading_get() + 5.0f);
 		SET_MOUSE_CURSOR_STYLE(6);
 	}
 	else if (IsMouseInBounds(Vector2(1.0 - 0.0078f, 0.5f), Vector2(0.0156f, 1.0f)))
 	{
-		GameplayCamera::RelativeHeading_set(GameplayCamera::RelativeHeading_get() - 5.0f);
 		SET_MOUSE_CURSOR_STYLE(7);
 	}
 	else
@@ -1129,7 +909,6 @@ void nullFunc() { return; }
 
 void AddTitle(std::string text)
 {
-	text = Language::TranslateToSelected(text);
 
 	if (titletext_ALPHA_DIS_TEMP)
 	{
@@ -1234,7 +1013,6 @@ void AddOption(std::string text, bool& option_code_bool, void(&callback)(), int 
 			tempChar = "  ~b~>"; // Font safe
 	}
 
-	text = Language::TranslateToSelected(text);
 
 	if (show_arrow || submenu_index != -1)
 	{
@@ -1431,7 +1209,6 @@ void AddBreak(std::string text)
 
 	}
 
-	text = Language::TranslateToSelected(text);
 
 	if (Menu::bit_centre_breaks)
 	{
@@ -1646,7 +1423,6 @@ inline void AddTexter(const std::string& text, int selectedindex, const TA& text
 			chartickStr = textarray.at(selectedindex);
 		}
 
-		chartickStr = DOES_TEXT_LABEL_EXIST(chartickStr.c_str()) ? GET_FILENAME_FOR_AUDIO_CONVERSATION(chartickStr.c_str()) : Language::TranslateToSelected(chartickStr);
 		FLOAT newXpos;
 		Game::Print::setupdraw(0, Vector2(0.26, 0.26), true, true, false, optiontext);
 
@@ -1723,35 +1499,3 @@ void Add_preset_colour_options_previews(const RGBA& rgb)
 {
 	Add_preset_colour_options_previews(rgb.R, rgb.G, rgb.B);
 }
-bool Add_preset_colour_options(INT& r, INT& g, INT& b)
-{
-	bool bPressed = false;
-	for (auto& colol : _vNeonColours)
-	{
-		null = 0;
-		AddTickol(colol.name.c_str(), r == colol.rgb.R && g == colol.rgb.G && b == colol.rgb.B, null, null);
-		if (null)
-		{
-			r = colol.rgb.R;
-			g = colol.rgb.G;
-			b = colol.rgb.B;
-			bPressed = true;
-		}
-
-		if (Menu::printingop == *Menu::currentopATM)
-			Add_preset_colour_options_previews(colol.rgb.R, colol.rgb.G, colol.rgb.B);
-	}
-	return bPressed;
-}
-
-
-
-
-
-
-
-
-
-
-
-
