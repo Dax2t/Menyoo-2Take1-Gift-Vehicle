@@ -15,10 +15,7 @@
 //#include "..\Scripting\enums.h"
 #include "..\Natives\natives2.h"
 #include "..\Memory\GTAmemory.h"
-#include "..\Menu\Language.h"
 #include "GTAentity.h"
-#include "GTAped.h"
-#include "GTAplayer.h"
 
 #include <string>
 #include <sstream>
@@ -287,7 +284,6 @@ namespace Game
 
 		void PrintBottomCentre(std::string s, int time)
 		{
-			s = Language::TranslateToSelected(s);
 			const char* text = s.c_str();
 
 			if (DOES_TEXT_LABEL_EXIST(text))
@@ -325,7 +321,6 @@ namespace Game
 		}
 		Notification PrintBottomLeft(std::string s, bool gxt)
 		{
-			s = Language::TranslateToSelected(s);
 			const char* text = s.c_str();
 
 			if (gxt && DOES_TEXT_LABEL_EXIST(text))
@@ -366,7 +361,6 @@ namespace Game
 				BEGIN_TEXT_COMMAND_THEFEED_POST(text);
 			else
 			{
-				s = Language::TranslateToSelected(s);
 				text = s.c_str();
 
 				if (s.length() < 100)
@@ -467,7 +461,6 @@ namespace Game
 			}
 			else
 			{
-				titlegxt = Language::TranslateToSelected(titlegxt);
 				if (titlegxt.length() < 100)
 				{
 					BEGIN_TEXT_COMMAND_DISPLAY_TEXT("STRING");
@@ -488,23 +481,5 @@ namespace Game
 		}
 
 		return GET_ONSCREEN_KEYBOARD_RESULT();
-	}
-
-	//PLAYER_PED_ID()
-	GTAplayer Player()
-	{
-		return PLAYER::PLAYER_ID();
-	}
-	GTAplayer Player(int index)
-	{
-		return GTAplayer(index);
-	}
-	GTAped PlayerPed()
-	{
-		return PLAYER::PLAYER_PED_ID();
-	}
-	GTAped PlayerPed(int index)
-	{
-		return PLAYER::GET_PLAYER_PED(index);
 	}
 }
