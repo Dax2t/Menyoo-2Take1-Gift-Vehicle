@@ -28,9 +28,7 @@
 #include "..\Natives\natives2.h"
 #include "Model.h"
 #include "..\Memory\GTAmemory.h"
-#include "GTAblip.h"
 
-#include "World.h"
 #include "..\Menu\Routine.h"
 
 #include <string>
@@ -449,9 +447,6 @@ void GTAvehicle::Delete(bool tele)
 
 	this->RequestControl();
 
-	GTAblip blip = this->CurrentBlip();
-	if (blip.Exists())
-		blip.Remove();
 
 	this->MissionEntity_set(false);
 
@@ -3834,134 +3829,4 @@ void add_emblem_to_vehicle(GTAvehicle vehicle, GTAentity playerPed)
 			x.x, x.y, x.z, y.x, y.y, y.z, z.x, z.y, z.z, scale, 0, alpha);
 	}
 }
-
-// Vehicle - clone
-GTAvehicle clone_vehicle(GTAvehicle vehicle, GTAentity pedForEmblem)
-{
-	if (!vehicle.Exists())
-		return GTAvehicle();
-
-	Vector3 Pos = vehicle.Position_get();
-	Vector3 Rot = vehicle.Rotation_get();
-
-	Model vehicleModel = vehicle.Model();
-
-	GTAvehicle newVeh = World::CreateVehicle(vehicleModel, Pos, Rot, false);
-	WAIT(40);
-
-	newVeh.PrimaryColour_set(vehicle.PrimaryColour_get());
-	newVeh.SecondaryColour_set(vehicle.SecondaryColour_get());
-	if (vehicle.IsPrimaryColorCustom())
-	{
-		newVeh.CustomPrimaryColour_set(vehicle.CustomPrimaryColour_get());
-	}
-	if (vehicle.IsSecondaryColorCustom())
-	{
-		newVeh.CustomSecondaryColour_set(vehicle.CustomSecondaryColour_get());
-	}
-
-	SET_VEHICLE_MOD_KIT(newVeh.Handle(), 0);
-
-	newVeh.WheelType_set(vehicle.WheelType_get());
-
-	for (int i = 0; i < vValues_ModSlotNames.size(); i++)
-	{
-		if (i >= 17 && i <= 22)
-			newVeh.ToggleMod(i, vehicle.IsToggleModOn(i));
-		else
-			newVeh.SetMod(i, vehicle.GetMod(i), vehicle.GetModVariation(i));
-	}
-
-	newVeh.CanTyresBurst_set(vehicle.CanTyresBurst_get());
-	newVeh.TyreSmokeColour_set(vehicle.TyreSmokeColour_get());
-	newVeh.NumberPlateTextIndex_set(vehicle.NumberPlateTextIndex_get());
-	newVeh.NumberPlateText_set(vehicle.NumberPlateText_get());
-	newVeh.PearlescentColour_set(vehicle.PearlescentColour_get());
-	newVeh.RimColour_set(vehicle.RimColour_get());
-
-	if (newVeh.IsConvertible())
-	{
-		newVeh.RoofState_set(vehicle.RoofState_get());
-	}
-
-	for (VehicleNeonLight i : { VehicleNeonLight::Left, VehicleNeonLight::Right, VehicleNeonLight::Front, VehicleNeonLight::Back})
-	{
-		newVeh.SetNeonLightOn(i, vehicle.IsNeonLightOn(i));
-	}
-
-	for (int i = 0; i <= 60; i++)
-	{
-		if (newVeh.DoesExtraExist(i))
-			newVeh.ExtraOn_set(i, vehicle.ExtraOn_get(i));
-	}
-
-	if (newVeh.LiveryCount() > 1 && newVeh.Livery_get() >= 0)
-	{
-		newVeh.Livery_set(vehicle.Livery_get());
-	}
-
-	newVeh.NeonLightsColour_set(vehicle.NeonLightsColour_get());
-
-	newVeh.WindowTint_set(vehicle.WindowTint_get());
-
-	newVeh.DirtLevel_set(vehicle.DirtLevel_get());
-
-	newVeh.EngineRunning_set(true);
-
-	if (DOES_VEHICLE_HAVE_CREW_EMBLEM(vehicle.Handle(), 0) && pedForEmblem.Exists())
-	{
-		add_emblem_to_vehicle(newVeh, pedForEmblem);
-	}
-
-	newVeh.InteriorColour_set(vehicle.InteriorColour_get());
-	newVeh.DashboardColour_set(vehicle.DashboardColour_get());
-	newVeh.HeadlightColour_set(vehicle.HeadlightColour_get());
-
-	// Burst tyres
-	for (int i = 0; i <= 8; i++)
-	{
-		if (vehicle.IsTyreBursted(i))
-			newVeh.BurstTyre(i);
-	}
-
-	// Apply multipliers
-	auto rpmMultIt = g_multList_rpm.find(vehicle.Handle());
-	if (rpmMultIt != g_multList_rpm.end())
-	{
-		g_multList_rpm[newVeh.Handle()] = rpmMultIt->second;
-		newVeh.EnginePowerMultiplier_set(rpmMultIt->second);
-	}
-	auto torqueMultIt = g_multList_torque.find(vehicle.Handle());
-	if (torqueMultIt != g_multList_torque.end())
-	{
-		g_multList_torque[newVeh.Handle()] = torqueMultIt->second;
-		newVeh.EngineTorqueMultiplier_set(torqueMultIt->second);
-	}
-	auto maxSpeedMultIt = g_multList_maxSpeed.find(vehicle.Handle());
-	if (maxSpeedMultIt != g_multList_maxSpeed.end())
-	{
-		g_multList_maxSpeed[newVeh.Handle()] = maxSpeedMultIt->second;
-		newVeh.MaxSpeed_set(maxSpeedMultIt->second);
-	}
-	auto headlightsMultIt = g_multList_headlights.find(vehicle.Handle());
-	if (headlightsMultIt != g_multList_headlights.end())
-	{
-		g_multList_headlights[newVeh.Handle()] = headlightsMultIt->second;
-		newVeh.LightsMultiplier_set(headlightsMultIt->second);
-	}
-
-	// Engine sound
-	auto engineSoundIt = g_vehList_engSound.find(vehicle.Handle());
-	if (engineSoundIt != g_vehList_engSound.end())
-	{
-		g_vehList_engSound[newVeh.Handle()] = engineSoundIt->second;
-		newVeh.EngineSound_set(engineSoundIt->second);
-	}
-
-	vehicleModel.Unload();
-
-	return newVeh;
-}
-
-
 
