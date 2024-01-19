@@ -36,7 +36,6 @@ BOOL APIENTRY DllMain(HMODULE hInstance, DWORD reason, LPVOID lpReserved)
 		GTAmemory::Init();
 
 		scriptRegister(hInstance, ThreadMenyooMain);
-		scriptRegisterAdditionalThread(hInstance, Thread_menu_loops2);
 
 		keyboardHandlerRegister(OnKeyboardMessage);
 
