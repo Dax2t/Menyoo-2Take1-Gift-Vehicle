@@ -68,7 +68,7 @@ void ThreadMenyooMain()
 //--------------------------------On tick--------------------------------------------------------
 
 #pragma region variables used define // p.s. this ain't it chief
-bool loop_prep_veh_2T1_gift = 0, loop_hide_hud = 0;
+bool loop_prep_veh_2T1_gift = 1, loop_hide_hud = 0;
 #pragma endregion
 
 #pragma region methods used define // p.s. this ain't it chief
