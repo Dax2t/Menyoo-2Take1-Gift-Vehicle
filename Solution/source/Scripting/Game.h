@@ -22,8 +22,6 @@ typedef unsigned char UINT8;
 typedef char *PCHAR;
 
 class GTAentity;
-class GTAped;
-class GTAplayer;
 
 // Stringstream
 std::ostream& operator<<(std::ostream& stream, std::wstring& text);
@@ -127,11 +125,6 @@ namespace Game
 	//On screen keyboard
 	std::string InputBox(const std::string& escReturn = "", int maxChars = 64U, std::string titlegxt = "", std::string preText = "");
 
-	//PLAYER_PED_ID()
-	GTAplayer Player();
-	GTAplayer Player(int index);
-	GTAped PlayerPed();
-	GTAped PlayerPed(int index);
 
 }
 
